@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { defineAsyncComponent, ref } from 'vue'
 import { useCart, useCartNotice } from './composables'
 
 const { totalCount } = useCart()
 const { cartNoticeVisible, cartNoticeTitle, closeCartNotice } = useCartNotice()
 const currentYear = new Date().getFullYear()
+const assistantOpen = ref(false)
+
+const AIAssistantDrawer = defineAsyncComponent(
+  () => import('./components/AIAssistantDrawer.vue'),
+)
 </script>
 
 <template>
@@ -31,6 +37,24 @@ const currentYear = new Date().getFullYear()
     </main>
 
     <footer class="shell__footer">© {{ currentYear }} Nebula Mart Demo</footer>
+
+    <button
+      class="assistant-fab"
+      type="button"
+      aria-label="打开 AI 导购助手"
+      @click="assistantOpen = true"
+    >
+      <span class="assistant-fab__dot">AI</span>
+      <span class="assistant-fab__text">
+        导购助手
+        <small v-if="totalCount > 0">{{ totalCount }} 件待结算</small>
+      </span>
+    </button>
+
+    <AIAssistantDrawer
+      v-if="assistantOpen"
+      v-model="assistantOpen"
+    />
 
     <Teleport to="body">
       <Transition name="notice-slide">
@@ -151,6 +175,50 @@ const currentYear = new Date().getFullYear()
   color: var(--muted);
 }
 
+.assistant-fab {
+  position: fixed;
+  right: 18px;
+  bottom: 20px;
+  z-index: 72;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  color: #fff;
+  min-height: 52px;
+  padding: 8px 14px 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 24px rgba(77, 46, 141, 0.28);
+  cursor: pointer;
+}
+
+.assistant-fab__dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.assistant-fab__text {
+  display: grid;
+  text-align: left;
+  gap: 1px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.assistant-fab__text small {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.88;
+}
+
 .notice-slide-enter-active,
 .notice-slide-leave-active {
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -250,6 +318,15 @@ const currentYear = new Date().getFullYear()
     order: 3;
     width: 100%;
     margin-left: 0;
+  }
+
+  .assistant-fab {
+    right: 12px;
+    bottom: 14px;
+  }
+
+  .assistant-fab__text small {
+    display: none;
   }
 
   .mini-notice {
