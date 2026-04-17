@@ -1,0 +1,6 @@
+export { default as HomeView } from './HomeView.vue'
+export { default as ProductsView } from './ProductsView.vue'
+export { default as ProductDetailView } from './ProductDetailView.vue'
+export { default as CartView } from './CartView.vue'
+export { default as OrdersView } from './OrdersView.vue'
+export { default as NotFoundView } from './NotFoundView.vue'

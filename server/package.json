@@ -1,0 +1,15 @@
+{
+    "name": "genui-sdk-server",
+    "version": "1.0.0",
+    "description": "GenUI SDK Server",
+    "main": "index.js",
+    "scripts": {
+        "dev": "genui-sdk-server",
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "@opentiny/genui-sdk-server": "1.1.2",
+        "cors": "^2.8.5",
+        "express": "^5.2.1"
+    }
+}

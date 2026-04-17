@@ -1,0 +1,16 @@
+{
+  "name": "genui-sdk-demos",
+  "version": "1.0.0",
+  "description": "GenUI SDK Demos",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "pnpm -F genui-sdk-server dev"
+  },
+  "keywords": [],
+  "author": "OpenTiny",
+  "packageManager": "pnpm@10.12.1",
+  "devDependencies": {
+    "@babel/parser": "^7.28.3",
+    "concurrently": "^9.1.2"
+  }
+}
