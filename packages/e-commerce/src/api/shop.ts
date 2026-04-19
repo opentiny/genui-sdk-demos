@@ -12,14 +12,16 @@ export async function fetchAllProducts(): Promise<Product[]> {
 }
 
 export async function searchProducts(keyword: string): Promise<Product[]> {
-  await delay(150)
-  const k = normalizeKeyword(keyword)
-  if (!k) return [...MOCK_PRODUCTS]
+  const terms = normalizeKeyword(keyword).split(/\s+/).filter(Boolean)
+  if (!terms.length) return [...MOCK_PRODUCTS]
   return MOCK_PRODUCTS.filter(
     (p) =>
-      p.id.toLowerCase().includes(k) ||
-      p.title.toLowerCase().includes(k) ||
-      p.tags.some((t) => t.toLowerCase().includes(k)),
+      terms.some(
+        (term) =>
+          p.id.toLowerCase().includes(term) ||
+          p.title.toLowerCase().includes(term) ||
+          p.tags.some((t) => t.toLowerCase().includes(term)),
+      ),
   ).slice(0, 12)
 }
 

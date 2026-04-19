@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { fetchAllProducts } from '../api'
+import { fetchAllProducts, searchProducts } from '../api'
 import { ProductCard } from '../components'
 import { useCart, useCartNotice } from '../composables'
 import type { Product } from '../types'
@@ -12,15 +12,21 @@ const { showCartNotice } = useCartNotice()
 
 const loading = ref(true)
 const allProducts = ref<Product[]>([])
+const keywordMatchedProducts = ref<Product[]>([])
 const keyword = ref('')
 const activeTag = ref('全部')
 
 onMounted(async () => {
   try {
     allProducts.value = await fetchAllProducts()
+    keywordMatchedProducts.value = await searchProducts(keyword.value)
   } finally {
     loading.value = false
   }
+})
+
+watch(keyword, async (nextKeyword) => {
+  keywordMatchedProducts.value = await searchProducts(nextKeyword)
 })
 
 const tags = computed(() => {
@@ -33,17 +39,9 @@ const tags = computed(() => {
   return ['全部', ...items]
 })
 
-const filteredProducts = computed(() => {
-  const normalizedKeyword = keyword.value.trim().toLowerCase()
-  return allProducts.value.filter((product) => {
-    const hitKeyword =
-      !normalizedKeyword ||
-      product.title.toLowerCase().includes(normalizedKeyword) ||
-      product.tags.some((tag) => tag.toLowerCase().includes(normalizedKeyword))
-    const hitTag = activeTag.value === '全部' || product.tags.includes(activeTag.value)
-    return hitKeyword && hitTag
-  })
-})
+const filteredProducts = computed(() =>
+  keywordMatchedProducts.value.filter((product) => activeTag.value === '全部' || product.tags.includes(activeTag.value)),
+)
 
 function openProduct(product: Product) {
   router.push(`/products/${product.id}`)
