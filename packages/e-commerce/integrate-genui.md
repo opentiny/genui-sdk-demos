@@ -1,6 +1,5 @@
-# 电商系统集成生成式 UI 指导文档（新手版）
+# 电商系统集成生成式 UI 指导文档
 
-本文基于 commit `18a18d5995d8912c98a14a57834a6c6ff67e30e6` 的完整改动整理，目标是让第一次接触 GenUI 的同学也能从 0 到 1 跑通集成。
 
 ---
 
@@ -501,7 +500,7 @@ export async function callMcpToolAsText(name: string, args: Record<string, unkno
 
 ```
 
-## 自定义fetch
+## 7.自定义fetch
 
 要想将mcp接入到智能助手中，需要通过自定义fetch。
 新建文件：`src/genui/mcp/custom-fetch.ts`
@@ -729,7 +728,7 @@ export function createMcpOpenAICustomFetch(config: OpenAIFetchConfig): CustomFet
 ```
 
 
-## 引入自定义fetch
+## 8.引入自定义fetch
 改造一下`AIAssistantDrawer.vue`, 引入并使用自定义fetch
 
 ```js
@@ -761,7 +760,7 @@ const customFetch = createMcpOpenAICustomFetch({
 
 现在还缺少了一点东西。导致整体体验还不是很好。下面我们来完善一下。
 
-## 5. 自定义组件
+## 9. 自定义组件
 
 新建文件 `src/genui/chat/custom-components.ts` 复用电商系统中的`ProductCard.vue`商品卡片。填写相关字段和定义好参数。提供给大模型进行理解，ref字段配置组件。在渲染时会渲染指定组件。
 
@@ -814,7 +813,7 @@ import { customComponents } from '../genui/chat/custom-components'
 />
 ```
 
-## 6. 自定义交互
+## 10. 自定义交互
 有了自定义组件了，我们缺少自定义交互。
 在 `src/genui/chat/custom-actions.ts` 定义交互动作：
 
