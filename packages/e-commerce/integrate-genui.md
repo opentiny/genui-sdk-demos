@@ -56,6 +56,7 @@ pnpm dev:server
 > 大模型对话接口为 `http://localhost:3100/chat/completions`。
 
 至此，后台服务就准备完成了，下面来进行前端的改造。
+
 ---
 
 ## 3. 前端安装 GenUI 相关依赖
@@ -1001,6 +1002,7 @@ const customActions = computed(() =>
 集成了自定义组件和自定义交互后，我们再来输入问题 “我想去露营！但我没经验，也没装备，预算 1500 元以内！”，体验，查看一下助手的回答。
 
 卡片生成完毕后，我们点击加入购物车，可以看到，成功地弹出了提示。并且购物车中也添加了对应的商品。
+
 ![add-to-cart.png](./docs-image/add-to-cart.png)
 ---
 
