@@ -294,7 +294,7 @@
           {
             "name": { "zh_CN": "图标" },
             "component": "NIconSvg",
-            "description": "图标组件，name 为图标名，例如 SearchOutline、AddOutline",
+            "description": "图标组件，name 为图标名，例如 SearchOutline、CheckmarkOutline",
             "schema": {
               "properties": [
                 {
@@ -304,7 +304,7 @@
                     {
                       "property": "name",
                       "label": { "text": { "zh_CN": "图标名称" } },
-                      "description": { "zh_CN": "图标名称，例如 SearchOutline（搜索）、AddOutline（加号）" },
+                      "description": { "zh_CN": "图标名称，例如 SearchOutline（搜索）、CheckmarkOutline（对勾）" },
                       "required": true,
                       "type": "string",
                       "cols": 12,
