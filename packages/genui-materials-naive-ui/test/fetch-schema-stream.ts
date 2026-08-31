@@ -7,6 +7,7 @@ import { PatternExtractor } from '@opentiny/genui-sdk-core';
 export async function fetchSchemaStream(
   url: string,
   apiKey: string,
+  model: string,
   userInput: string,
   systemPrompt: string,
   onSchemaUpdate: (schemaChunk: string) => void,
@@ -22,7 +23,7 @@ export async function fetchSchemaStream(
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userInput },
       ],
-      model: 'deepseek-v4-flash',
+      model,
       thinking: {
         type: 'disabled',
       },

@@ -48,6 +48,7 @@ const handleSend = async () => {
     await fetchSchemaStream(
       import.meta.env.VITE_DEEPSEEK_API_URL,
       import.meta.env.VITE_DEEPSEEK_API_KEY,
+      import.meta.env.VITE_DEEPSEEK_MODEL,
       userInput,
       systemPrompt,
       (schemaChunk) => {
